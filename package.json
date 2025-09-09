@@ -1,0 +1,1063 @@
+// package.json
+{
+  "name": "y-millennial-funding",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.0.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5"
+  },
+  "devDependencies": {
+    "eslint": "^8",
+    "eslint-config-next": "14.0.0"
+  }
+}
+
+// next.config.js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',
+  trailingSlash: true,
+  images: {
+    unoptimized: true
+  }
+}
+
+module.exports = nextConfig
+
+// app/layout.tsx
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: 'Y Millennial Funding | Business Funding Solutions | Up to $5M Direct Funding',
+  description: 'Direct business funder specializing in first-time loans and 1st-5th position MCA deals up to $5M. 24-month terms, same-day decisions, 24-hour funding.',
+  keywords: 'business funding, business loans, MCA stacking, 1st position MCA, merchant cash advance, direct funder, alternative lending, working capital',
+  authors: [{ name: 'Y Millennial Funding' }],
+  openGraph: {
+    title: 'Y Millennial Funding | Business Funding Solutions',
+    description: 'Direct business funder specializing in first-time loans and 1st-5th position MCA deals up to $5M. Same-day decisions, 24-hour funding.',
+    url: 'https://ymillennialfunding.com',
+    siteName: 'Y Millennial Funding',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Y Millennial Funding | Business Funding Solutions',
+    description: 'Direct business funder specializing in first-time loans and 1st-5th position MCA deals up to $5M. Same-day decisions.',
+    site: '@ymillennialfunding',
+    creator: '@ymillennialfunding',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <head>
+        <link rel="canonical" href="https://ymillennialfunding.com" />
+        <meta name="geo.region" content="US" />
+        <meta name="geo.placename" content="United States" />
+        <meta name="theme-color" content="#1a1f3a" />
+        
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FinancialService",
+              "name": "Y Millennial Funding",
+              "description": "Direct business funder specializing in first-time business loans and 1st-5th position merchant cash advance deals up to $5M.",
+              "url": "https://ymillennialfunding.com",
+              "telephone": "+1-800-FUNDING",
+              "email": "funding@ymillennialfunding.com",
+              "areaServed": "US",
+              "serviceType": ["Business Loans", "Merchant Cash Advance"],
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "247"
+              }
+            })
+          }}
+        />
+      </head>
+      <body className={inter.className}>
+        {children}
+      </body>
+    </html>
+  )
+}
+
+// app/globals.css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+.header {
+  background: #1a1f3a;
+  color: white;
+  padding: 1rem 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: white;
+}
+
+.logo-icon {
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(135deg, #9ACD8A, #7CB369);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #1a1f3a;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.nav-links a:hover {
+  color: #9ACD8A;
+}
+
+.cta-button {
+  background: linear-gradient(135deg, #9ACD8A, #7CB369);
+  color: #1a1f3a;
+  padding: 12px 24px;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(154, 205, 138, 0.3);
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #1a1f3a 0%, #2d3561 100%);
+  color: white;
+  padding: 120px 0 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%239ACD8A;stop-opacity:0.1"/><stop offset="100%" style="stop-color:%237CB369;stop-opacity:0.05"/></linearGradient></defs><path d="M0,400 Q300,200 600,400 T1200,400 V800 H0 Z" fill="url(%23g1)"/></svg>') no-repeat center center/cover;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(154, 205, 138, 0.2);
+  color: #9ACD8A;
+  padding: 10px 25px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  border: 1px solid rgba(154, 205, 138, 0.3);
+}
+
+.hero h1 {
+  font-size: 3.8rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.hero .highlight {
+  color: #9ACD8A;
+}
+
+.hero .subtitle {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  color: #9ACD8A;
+  font-weight: 500;
+}
+
+.hero p {
+  font-size: 1.3rem;
+  margin-bottom: 2.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.95;
+  line-height: 1.5;
+}
+
+.qualification-bar {
+  background: rgba(154, 205, 138, 0.15);
+  border: 2px solid rgba(154, 205, 138, 0.3);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 30px auto;
+  max-width: 700px;
+  backdrop-filter: blur(10px);
+}
+
+.qualification-bar h2 {
+  color: #9ACD8A;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.qualification-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  font-size: 1rem;
+  list-style: none;
+}
+
+.qualification-list li {
+  color: rgba(255, 255, 255, 0.9);
+  position: relative;
+  padding-left: 25px;
+}
+
+.qualification-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #9ACD8A;
+  font-weight: bold;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 40px 0;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #9ACD8A, #7CB369);
+  color: #1a1f3a;
+  padding: 18px 35px;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid #9ACD8A;
+  padding: 18px 35px;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  text-align: center;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px 25px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-width: 180px;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+}
+
+.stat-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #9ACD8A;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 1rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+/* Application Form */
+.apply-form {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.form-header h2 {
+  color: #1a1f3a;
+  font-size: 3rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.form-header p {
+  font-size: 1.3rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.qualification-notice {
+  background: rgba(154, 205, 138, 0.1);
+  color: #1a1f3a;
+  padding: 20px 30px;
+  border-radius: 50px;
+  display: inline-block;
+  font-weight: 600;
+  border: 2px solid rgba(154, 205, 138, 0.2);
+}
+
+.application-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.funding-form {
+  background: white;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  border-top: 6px solid #9ACD8A;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  color: #1a1f3a;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.form-group input,
+.form-group select {
+  padding: 18px;
+  border: 2px solid #e1e5e9;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background: white;
+  font-family: 'Inter', sans-serif;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #9ACD8A;
+  box-shadow: 0 0 0 4px rgba(154, 205, 138, 0.1);
+}
+
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #9ACD8A, #7CB369);
+  color: #1a1f3a;
+  border: none;
+  padding: 22px 35px;
+  border-radius: 15px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(154, 205, 138, 0.3);
+}
+
+.security-note {
+  text-align: center;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+/* Form Benefits */
+.form-benefits {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  height: fit-content;
+  border-top: 6px solid #9ACD8A;
+}
+
+.form-benefits h3 {
+  color: #1a1f3a;
+  font-size: 1.6rem;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.step-number {
+  background: linear-gradient(135deg, #9ACD8A, #7CB369);
+  color: #1a1f3a;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.benefit-item h4 {
+  color: #1a1f3a;
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.benefit-item p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.contact-alternative {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 2px solid #f0f0f0;
+  text-align: center;
+}
+
+.contact-alternative h4 {
+  color: #1a1f3a;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.phone-cta {
+  display: inline-block;
+  background: #1a1f3a;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 15px;
+  transition: all 0.3s;
+  font-size: 1.1rem;
+}
+
+.phone-cta:hover {
+  background: #2d3561;
+  transform: translateY(-2px);
+}
+
+/* Contact Section */
+.contact {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #9ACD8A, #7CB369);
+  color: #1a1f3a;
+  text-align: center;
+}
+
+.contact h2 {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 35px;
+  flex-wrap: wrap;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 15px 25px;
+  border-radius: 30px;
+  transition: all 0.3s;
+}
+
+.contact-item:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Footer */
+.footer {
+  background: #1a1f3a;
+  color: white;
+  padding: 50px 0 25px;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  
+  .hero h1 {
+    font-size: 2.8rem;
+  }
+  
+  .hero .subtitle {
+    font-size: 1.3rem;
+  }
+  
+  .qualification-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-stats {
+    gap: 20px;
+    flex-direction: column;
+  }
+  
+  .contact-info {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .application-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .funding-form {
+    padding: 30px;
+  }
+  
+  .form-benefits {
+    order: -1;
+  }
+}
+
+// app/page.tsx
+'use client'
+
+import { useState } from 'react'
+import Link from 'next/link'
+
+export default function Home() {
+  const [formData, setFormData] = useState({
+    fullName: '',
+    phone: '',
+    businessName: '',
+    email: '',
+    monthlyRevenue: '',
+    currentPositions: '',
+    industry: '',
+    fundingAmount: ''
+  })
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    // Show loading state
+    const submitBtn = e.currentTarget.querySelector('.submit-btn') as HTMLButtonElement
+    const originalContent = submitBtn.innerHTML
+    submitBtn.innerHTML = '<span>⚡</span> <span>Processing...</span>'
+    submitBtn.disabled = true
+    
+    // Simulate form submission
+    setTimeout(() => {
+      alert('🎉 Application submitted successfully! Our team will call you within 1 hour during business hours.')
+      
+      // Reset form
+      setFormData({
+        fullName: '',
+        phone: '',
+        businessName: '',
+        email: '',
+        monthlyRevenue: '',
+        currentPositions: '',
+        industry: '',
+        fundingAmount: ''
+      })
+      
+      // Reset button
+      submitBtn.innerHTML = originalContent
+      submitBtn.disabled = false
+    }, 2000)
+  }
+
+  return (
+    <>
+      {/* Header */}
+      <header className="header" role="banner">
+        <nav className="container nav" role="navigation">
+          <Link href="/" className="logo">
+            <div className="logo-icon">Y</div>
+            <span>Millennial Funding</span>
+          </Link>
+          <ul className="nav-links" role="menubar">
+            <li><a href="#apply">Apply Now</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <a href="tel:+1-800-FUNDING" className="cta-button">📞 Direct Line</a>
+        </nav>
+      </header>
+
+      <main role="main">
+        {/* Hero Section */}
+        <section className="hero">
+          <div className="container">
+            <div className="hero-content">
+              <div className="hero-badge">🎯 Direct Funder • 1st-5th Position Specialist</div>
+              <h1>Need <span className="highlight">Business Funding?</span></h1>
+              <p className="subtitle">Up to $5M • 24-Month Terms • Fast Decisions</p>
+              <p>Direct funder specializing in both first-time business loans and complex stacking arrangements for established businesses. Already have an MCA? We fund 2nd-5th positions. We fund where others won't, with same-day decisions and 24-hour funding for qualified deals.</p>
+              
+              <div className="qualification-bar">
+                <h2>🎯 We Fund:</h2>
+                <ul className="qualification-list">
+                  <li>First-time business loans</li>
+                  <li>1st-5th position MCA deals</li>
+                  <li>Complex stacking arrangements</li>
+                  <li>$50K-$5M funding amounts</li>
+                  <li>All industries welcome</li>
+                  <li>24-hour funding available</li>
+                </ul>
+              </div>
+              
+              <div className="hero-buttons">
+                <a href="#apply" className="btn-primary">
+                  <span>🚀</span>
+                  <span>Apply For Funding</span>
+                </a>
+                <a href="tel:+1-800-FUNDING" className="btn-secondary">
+                  <span>📞</span>
+                  <span>Speak to Our Team</span>
+                </a>
+              </div>
+              
+              <div className="hero-stats">
+                <div className="stat-item">
+                  <span className="stat-number">24hrs</span>
+                  <span className="stat-label">Funding Speed</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-number">$5M</span>
+                  <span className="stat-label">Max Deal Size</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-number">24mo</span>
+                  <span className="stat-label">Max Term Length</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-number">1st-5th</span>
+                  <span className="stat-label">Position Specialist</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Application Form */}
+        <section id="apply" className="apply-form">
+          <div className="container">
+            <div className="form-header">
+              <h2>🚀 Get Your Funding Decision Today</h2>
+              <p>Complete our quick application and get your funding decision fast</p>
+              <div className="qualification-notice">First-time loans & 1st-5th position deals welcome</div>
+            </div>
+            
+            <div className="application-container">
+              <form className="funding-form" onSubmit={handleSubmit}>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="fullName">Business Owner Name *</label>
+                    <input 
+                      type="text" 
+                      id="fullName" 
+                      name="fullName" 
+                      value={formData.fullName}
+                      onChange={handleInputChange}
+                      required 
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="phone">Direct Phone Number *</label>
+                    <input 
+                      type="tel" 
+                      id="phone" 
+                      name="phone" 
+                      placeholder="(555) 123-4567"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      required 
+                    />
+                  </div>
+                </div>
+                
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="businessName">Business Name *</label>
+                    <input 
+                      type="text" 
+                      id="businessName" 
+                      name="businessName"
+                      value={formData.businessName}
+                      onChange={handleInputChange}
+                      required 
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="email">Email Address *</label>
+                    <input 
+                      type="email" 
+                      id="email" 
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required 
+                    />
+                  </div>
+                </div>
+                
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="monthlyRevenue">Average Monthly Revenue *</label>
+                    <select 
+                      id="monthlyRevenue" 
+                      name="monthlyRevenue"
+                      value={formData.monthlyRevenue}
+                      onChange={handleInputChange}
+                      required
+                    >
+                      <option value="">Select Revenue Range</option>
+                      <option value="10000-50000">$10K - $50K</option>
+                      <option value="50000-100000">$50K - $100K</option>
+                      <option value="100000-250000">$100K - $250K</option>
+                      <option value="250000-500000">$250K - $500K</option>
+                      <option value="500000-1000000">$500K - $1M</option>
+                      <option value="1000000+">$1M+</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="currentPositions">Current MCA Positions</label>
+                    <select 
+                      id="currentPositions" 
+                      name="currentPositions"
+                      value={formData.currentPositions}
+                      onChange={handleInputChange}
+                    >
+                      <option value="">How many MCAs do you have?</option>
+                      <option value="0">None (First-time loan)</option>
+                      <option value="1">1 Position</option>
+                      <option value="2">2 Positions</option>
+                      <option value="3">3 Positions</option>
+                      <option value="4">4 Positions</option>
+                      <option value="5+">5+ Positions</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="industry">Primary Industry</label>
+                    <select 
+                      id="industry" 
+                      name="industry"
+                      value={formData.industry}
+                      onChange={handleInputChange}
+                    >
+                      <option value="">Select Your Industry</option>
+                      <option value="healthcare">Healthcare</option>
+                      <option value="transportation">Transportation/Logistics</option>
+                      <option value="construction">Construction</option>
+                      <option value="manufacturing">Manufacturing/Wholesale</option>
+                      <option value="retail">Retail/Franchise</option>
+                      <option value="restaurants">Restaurants/Food Service</option>
+                      <option value="professional">Professional Services</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="fundingAmount">Desired Funding Amount *</label>
+                    <select 
+                      id="fundingAmount" 
+                      name="fundingAmount"
+                      value={formData.fundingAmount}
+                      onChange={handleInputChange}
+                      required
+                    >
+                      <option value="">How much do you need?</option>
+                      <option value="50000-100000">$50K - $100K</option>
+                      <option value="100000-250000">$100K - $250K</option>
+                      <option value="250000-500000">$250K - $500K</option>
+                      <option value="500000-1000000">$500K - $1M</option>
+                      <option value="1000000-2500000">$1M - $2.5M</option>
+                      <option value="2500000+">$2.5M+</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <button type="submit" className="submit-btn">
+                  <span>⚡</span>
+                  <span>Get My Funding Decision</span>
+                </button>
+                
+                <div className="security-note">
+                  <span>🔒</span>
+                  <small>All information is encrypted and secure. We never share your data with third parties.</small>
+                </div>
+              </form>
+              
+              <div className="form-benefits">
+                <h3>⚡ What Happens Next?</h3>
+                <div className="benefit-item">
+                  <span className="step-number">1</span>
+                  <div>
+                    <h4>Instant Review</h4>
+                    <p>Our system immediately analyzes your submission for pre-qualification</p>
+                  </div>
+                </div>
+                <div className="benefit-item">
+                  <span className="step-number">2</span>
+                  <div>
+                    <h4>Team Call</h4>
+                    <p>Direct call from our funding team within 1 hour during business hours</p>
+                  </div>
+                </div>
+                <div className="benefit-item">
+                  <span className="step-number">3</span>
+                  <div>
+                    <h4>Same-Day Decision</h4>
+                    <p>Approval decision and term sheet within 4 hours for qualified deals</p>
+                  </div>
+                </div>
+                <div className="benefit-item">
+                  <span className="step-number">4</span>
+                  <div>
+                    <h4>24-Hour Funding</h4>
+                    <p>Funds wired directly to your account within 24 hours of acceptance</p>
+                  </div>
+                </div>
+                
+                <div className="contact-alternative">
+                  <h4>📞 Need Immediate Assistance?</h4>
+                  <a href="tel:+1-800-FUNDING" className="phone-cta">
+                    Talk to Our Team Now
+                  </a>
+                  <p>Direct line • Available 7 days/week • Immediate pre-qualification</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="contact">
+          <div className="container">
+            <h2>💬 Ready to Get Funded?</h2>
+            <p>Speak with our funding specialists about your business needs - first-time loans to complex stacking deals</p>
+            <div className="contact-info">
+              <div className="contact-item">
+                <span>📞</span>
+                <span>1-800-FUNDING</span>
+              </div>
+              <div className="contact-item">
+                <span>✉️</span>
+                <span>funding@ymillennialfunding.com</span>
+              </div>
+              <div className="contact-item">
+                <span>🕒</span>
+                <span>7 Days/Week</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="container">
+          <div className="logo" style={{ justifyContent: 'center', marginBottom: '20px' }}>
+            <div className="logo-icon">Y</div>
+            <span>Millennial Funding</span>
+          </div>
+          <p>&copy; 2025 Y Millennial Funding. All rights reserved.</p>
+          <p style={{ marginTop: '10px', fontSize: '0.9rem', color: '#888' }}>
+            Direct business funder specializing in first-time loans and stacking deals for growing businesses.
+          </p>
+        </div>
+      </footer>
+    </>
+  )
+}
